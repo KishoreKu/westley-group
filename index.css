@@ -969,12 +969,12 @@ body {
    INSIGHTS SECTION
    =================================== */
 
-.insights {
+.blog {
     padding: var(--spacing-3xl) 0;
     background: var(--color-bg-secondary);
 }
 
-.insights-grid {
+.blog-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: var(--spacing-xl);
@@ -1361,7 +1361,7 @@ body {
     }
 
     .solutions-grid,
-    .insights-grid,
+    .blog-grid,
     .testimonials-slider {
         grid-template-columns: 1fr;
     }
