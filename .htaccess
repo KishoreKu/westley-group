@@ -1,0 +1,22 @@
+# Enable URL Rewriting
+RewriteEngine On
+
+# Force HTTPS (production best practice)
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Remove .html extension from URLs
+# This allows /blog-mortgage-rates-3-year-low to work instead of /blog-mortgage-rates-3-year-low.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L,QSA]
+
+# Redirect .html URLs to clean URLs (301 permanent redirect)
+# This ensures old links with .html automatically redirect to clean URLs
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.html [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# Remove trailing slashes (optional, for consistency)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [R=301,L]
