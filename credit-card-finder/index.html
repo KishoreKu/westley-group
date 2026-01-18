@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Best Credit Card | Westley Group</title>
+    <meta name="description"
+        content="Get a personalized, AI-powered credit card recommendation based on your income, credit score, and spending habits. Stop guessing, make the right choice.">
+    <link rel="icon" type="image/png" href="../logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="../" class="logo">
+                <img src="../logo.png" alt="Westley Group Logo" class="logo-icon">
+                <span class="logo-text">WESTLEY GROUP</span>
+            </a>
+            <a href="../" class="back-link">← Back to Home</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Find the Best Credit Card for <span class="gradient-text">YOU</span> — in Minutes
+                </h1>
+                <p class="hero-subtitle">
+                    Stop guessing. Get a personalized, AI-powered recommendation based on your income, credit score, and
+                    spending habits.
+                </p>
+                <button class="btn btn-primary btn-large" id="mainCta">
+                    <span>Find My Best Card - $19</span>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" />
+                    </svg>
+                </button>
+                <div class="trust-signals">
+                    <div class="trust-item">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path
+                                d="M7 10L9 12L13 8M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z"
+                                stroke="#10B981" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        <span>Personalized</span>
+                    </div>
+                    <div class="trust-item">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path
+                                d="M7 10L9 12L13 8M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z"
+                                stroke="#10B981" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        <span>No signup required</span>
+                    </div>
+                    <div class="trust-item">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path
+                                d="M7 10L9 12L13 8M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z"
+                                stroke="#10B981" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        <span>Takes under 3 minutes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section problem-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">The Problem</span>
+                <h2 class="section-title">Choosing the wrong credit card costs you money every month</h2>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">💳</div>
+                    <h3>Cashback cards you never fully use</h3>
+                    <p>Earning 3% on categories you rarely spend in</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">✈️</div>
+                    <h3>Travel cards with fees that don't pay off</h3>
+                    <p>Paying $450/year but not flying enough to justify it</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">❌</div>
+                    <h3>Rejections that hurt your credit score</h3>
+                    <p>Applying for cards you're not qualified for</p>
+                </div>
+            </div>
+            <p class="problem-statement">
+                Most comparison sites rank cards based on commissions, not your situation.
+            </p>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section how-it-works-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">How It Works</span>
+                <h2 class="section-title">No blogs. No confusion.<br>Just the right decision.</h2>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Answer 7 quick questions</h3>
+                    <p>Tell us about your credit score, income, and spending habits</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Our AI analyzes your profile</h3>
+                    <p>Advanced algorithms match you with the perfect card</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Get your Top 3 cards</h3>
+                    <p>Ranked with clear reasoning and next steps</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What You Get Section -->
+    <section class="section features-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">What You Get</span>
+                <h2 class="section-title">Everything you need to make the right choice</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🥇</div>
+                    <h3>#1 recommended card</h3>
+                    <p>Our top pick specifically for your profile</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Top 3 ranked options</h3>
+                    <p>Alternative choices if you want to compare</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3>Why it fits YOU</h3>
+                    <p>Personalized reasoning based on your situation</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚠️</div>
+                    <h3>What to avoid</h3>
+                    <p>Cards that would be a poor fit for you</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Apply links (optional)</h3>
+                    <p>Direct links to application pages</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📧</div>
+                    <h3>Instant delivery</h3>
+                    <p>On screen + sent to your email</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="section pricing-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Simple Pricing</span>
+                <h2 class="section-title">One-Time Payment, Lifetime Value</h2>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-badge">Most Popular</div>
+                <div class="pricing-header">
+                    <div class="pricing-icon">💼</div>
+                    <h3>Full Recommendation</h3>
+                </div>
+                <div class="pricing-amount">
+                    <span class="currency">$</span>
+                    <span class="price">19</span>
+                </div>
+                <ul class="pricing-features">
+                    <li>✔ Detailed explanation</li>
+                    <li>✔ Ranked top 3 cards</li>
+                    <li>✔ Clear next steps</li>
+                    <li>✔ Personalized reasoning</li>
+                    <li>✔ What to avoid warnings</li>
+                    <li>✔ Instant + email delivery</li>
+                </ul>
+                <button class="btn btn-primary btn-large" id="pricingCta">
+                    Get My Recommendation
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">FAQ</span>
+                <h2 class="section-title">Common Questions</h2>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>Is this financial advice?</h3>
+                    <p>No. This is a decision-support tool based on your inputs. We provide recommendations, but you
+                        make the final decision.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Will this hurt my credit score?</h3>
+                    <p>No credit checks are performed. We only use the information you provide to make recommendations.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do I need to sign up?</h3>
+                    <p>No account required. Just answer the questions, pay $19, and get your recommendation instantly.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3>How accurate are the recommendations?</h3>
+                    <p>Our AI analyzes thousands of data points to match you with the best cards. While we can't
+                        guarantee results, our recommendations are based on your actual financial profile.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Questionnaire (Hidden Initially) -->
+    <div class="questionnaire-overlay" id="questionnaireOverlay">
+        <div class="questionnaire-modal">
+            <button class="close-btn" id="closeQuestionnaire">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+
+            <div class="questionnaire-header">
+                <h2>7 Quick Questions</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text"><span id="currentStep">1</span> of 7</p>
+            </div>
+
+            <form id="questionnaireForm" class="questionnaire-form">
+                <!-- Question 1: Credit Score -->
+                <div class="question-step active" data-step="1">
+                    <h3>What's your credit score range?</h3>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="creditScore" value="<580" required>
+                            <span class="option-content">
+                                <span class="option-label">&lt;580</span>
+                                <span class="option-desc">Building credit</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="creditScore" value="580–669" required>
+                            <span class="option-content">
+                                <span class="option-label">580–669</span>
+                                <span class="option-desc">Fair credit</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="creditScore" value="670–739" required>
+                            <span class="option-content">
+                                <span class="option-label">670–739</span>
+                                <span class="option-desc">Good credit</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="creditScore" value="740+" required>
+                            <span class="option-content">
+                                <span class="option-label">740+</span>
+                                <span class="option-desc">Excellent credit</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 2: Monthly Income -->
+                <div class="question-step" data-step="2">
+                    <h3>What's your monthly income?</h3>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="income" value="<$2,000" required>
+                            <span class="option-content">
+                                <span class="option-label">&lt;$2,000</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="income" value="$2,000–$5,000" required>
+                            <span class="option-content">
+                                <span class="option-label">$2,000–$5,000</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="income" value="$5,000–$10,000" required>
+                            <span class="option-content">
+                                <span class="option-label">$5,000–$10,000</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="income" value="$10,000+" required>
+                            <span class="option-content">
+                                <span class="option-label">$10,000+</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 3: Spending Categories -->
+                <div class="question-step" data-step="3">
+                    <h3>Top spending categories (pick up to 3)</h3>
+                    <p class="question-note">Select your main spending areas</p>
+                    <div class="options-grid checkbox-grid">
+                        <label class="option-card checkbox-card">
+                            <input type="checkbox" name="spending" value="Groceries">
+                            <span class="option-content">
+                                <span class="option-label">🛒 Groceries</span>
+                            </span>
+                        </label>
+                        <label class="option-card checkbox-card">
+                            <input type="checkbox" name="spending" value="Gas">
+                            <span class="option-content">
+                                <span class="option-label">⛽ Gas</span>
+                            </span>
+                        </label>
+                        <label class="option-card checkbox-card">
+                            <input type="checkbox" name="spending" value="Dining">
+                            <span class="option-content">
+                                <span class="option-label">🍽️ Dining</span>
+                            </span>
+                        </label>
+                        <label class="option-card checkbox-card">
+                            <input type="checkbox" name="spending" value="Travel">
+                            <span class="option-content">
+                                <span class="option-label">✈️ Travel</span>
+                            </span>
+                        </label>
+                        <label class="option-card checkbox-card">
+                            <input type="checkbox" name="spending" value="Online shopping">
+                            <span class="option-content">
+                                <span class="option-label">🛍️ Online shopping</span>
+                            </span>
+                        </label>
+                    </div>
+                    <p class="error-message" id="spendingError"></p>
+                </div>
+
+                <!-- Question 4: Primary Goal -->
+                <div class="question-step" data-step="4">
+                    <h3>What's your primary goal?</h3>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="goal" value="Cashback" required>
+                            <span class="option-content">
+                                <span class="option-label">💰 Cashback</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="goal" value="Travel rewards" required>
+                            <span class="option-content">
+                                <span class="option-label">✈️ Travel rewards</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="goal" value="Low APR" required>
+                            <span class="option-content">
+                                <span class="option-label">📉 Low APR</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="goal" value="Credit building" required>
+                            <span class="option-content">
+                                <span class="option-label">📈 Credit building</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 5: Carry Balance -->
+                <div class="question-step" data-step="5">
+                    <h3>Do you usually carry a balance?</h3>
+                    <p class="question-note">Be honest - this affects which card is best for you</p>
+                    <div class="options-grid two-col">
+                        <label class="option-card">
+                            <input type="radio" name="carriesBalance" value="Yes" required>
+                            <span class="option-content">
+                                <span class="option-label">Yes</span>
+                                <span class="option-desc">I sometimes carry a balance</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="carriesBalance" value="No" required>
+                            <span class="option-content">
+                                <span class="option-label">No</span>
+                                <span class="option-desc">I pay in full each month</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 6: Annual Fee -->
+                <div class="question-step" data-step="6">
+                    <h3>What's your annual fee comfort level?</h3>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="annualFee" value="$0 only" required>
+                            <span class="option-content">
+                                <span class="option-label">$0 only</span>
+                                <span class="option-desc">No annual fees</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="annualFee" value="Under $95" required>
+                            <span class="option-content">
+                                <span class="option-label">Under $95</span>
+                                <span class="option-desc">Modest fee okay</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="annualFee" value="Any fee is fine" required>
+                            <span class="option-content">
+                                <span class="option-label">Any fee is fine</span>
+                                <span class="option-desc">If benefits justify it</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 7: Credit History -->
+                <div class="question-step" data-step="7">
+                    <h3>How long is your credit history?</h3>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="creditHistory" value="Less than 1 year" required>
+                            <span class="option-content">
+                                <span class="option-label">Less than 1 year</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="creditHistory" value="1–3 years" required>
+                            <span class="option-content">
+                                <span class="option-label">1–3 years</span>
+                            </span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="creditHistory" value="3+ years" required>
+                            <span class="option-content">
+                                <span class="option-label">3+ years</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Email Step -->
+                <div class="question-step" data-step="8">
+                    <h3>Where should we send your results?</h3>
+                    <p class="question-note">We'll email you a copy of your recommendation</p>
+                    <div class="email-input-wrapper">
+                        <input type="email" id="emailInput" name="email" placeholder="your@email.com" required>
+                    </div>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary" id="prevBtn" style="display:none;">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M12 8H4M4 8L8 12M4 8L8 4" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                        <span>Back</span>
+                    </button>
+                    <button type="button" class="btn btn-primary" id="nextBtn">
+                        <span>Next</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 8H12M12 8L8 4M12 8L8 12" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-primary btn-large" id="payBtn" style="display:none;">
+                        <span>Pay $19 & Get Recommendation</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Results Section (Hidden Initially) -->
+    <div class="results-overlay" id="resultsOverlay" style="display:none;">
+        <div class="results-modal">
+            <button class="close-btn" id="closeResults">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+
+            <div class="results-header">
+                <div class="success-icon">✅</div>
+                <h2>Your Personalized Recommendation</h2>
+                <p>Based on your financial profile</p>
+            </div>
+
+            <div class="results-content" id="resultsContent">
+                <!-- AI recommendation will be inserted here -->
+            </div>
+
+            <div class="results-footer">
+                <p class="disclaimer">
+                    <strong>⚠️ Disclaimer:</strong> This is a decision-support tool, not financial advice. Please review
+                    card terms before applying.
+                </p>
+                <p class="email-sent">
+                    📧 A copy has been sent to your email
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display:none;">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h3>Processing Your Request...</h3>
+            <p id="loadingMessage">Analyzing your financial profile</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

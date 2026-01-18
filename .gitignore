@@ -45,3 +45,8 @@ yarn-error.log*
 *.bak
 *.backup
 *~
+
+# Backend
+backend/node_modules/
+backend/.env
+backend/*.log
