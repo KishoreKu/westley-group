@@ -291,11 +291,11 @@ async function handlePayment() {
     saveCurrentStepData();
 
     // Show loading
-    showLoading('Creating secure payment...');
+    showLoading('Processing payment and generating recommendation...');
 
     try {
         // Create payment intent
-        const response = await fetch(`${API_URL}/api/create-payment-intent`, {
+        const paymentResponse = await fetch(`${API_URL}/api/create-payment-intent`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -309,33 +309,50 @@ async function handlePayment() {
             })
         });
 
-        if (!response.ok) {
+        if (!paymentResponse.ok) {
             throw new Error('Failed to create payment');
         }
 
-        const data = await response.json();
-        paymentIntentId = data.paymentIntentId;
+        const paymentData = await paymentResponse.json();
+        paymentIntentId = paymentData.paymentIntentId;
 
-        // For now, redirect to Stripe Checkout
-        // TODO: Implement embedded Stripe payment form
-        hideLoading();
+        // For testing: Skip Stripe UI and directly generate recommendation
+        // In production, you would redirect to Stripe Checkout here
+        const recommendationResponse = await fetch(`${API_URL}/api/generate-recommendation`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                paymentIntentId: paymentIntentId,
+                email: formData.email,
+                userProfile: {
+                    creditScore: formData.creditScore,
+                    income: formData.income,
+                    spending: formData.spending,
+                    goal: formData.goal,
+                    carriesBalance: formData.carriesBalance,
+                    annualFee: formData.annualFee,
+                    creditHistory: formData.creditHistory
+                }
+            })
+        });
 
-        // Show payment instructions (temporary solution)
-        const proceed = confirm(
-            `Payment Required: $19\n\n` +
-            `Click OK to proceed with payment processing.\n\n` +
-            `(In production, this will open a Stripe payment form)`
-        );
-
-        if (proceed) {
-            // Simulate successful payment for development
-            await handleSuccessfulPayment(paymentIntentId);
+        if (!recommendationResponse.ok) {
+            const errorData = await recommendationResponse.json();
+            throw new Error(errorData.message || 'Failed to generate recommendation');
         }
+
+        const data = await recommendationResponse.json();
+
+        hideLoading();
+        closeQuestionnaire();
+        showResults(data.recommendation);
 
     } catch (error) {
         hideLoading();
         console.error('Payment error:', error);
-        alert(`Payment failed: ${error.message}\n\nPlease try again or contact support.`);
+        alert(`Error: ${error.message}\n\nPlease try again or contact support at hello@westley-group.com`);
     }
 }
 
