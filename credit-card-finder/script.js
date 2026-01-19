@@ -1,6 +1,6 @@
 // Configuration
-const API_URL = 'https://api.westley-group.com'; // Update this to your actual backend URL
-const STRIPE_PUBLIC_KEY = ''; // Will be loaded from backend or configured manually
+const API_URL = 'https://westley-backend-202527262438.us-central1.run.app';
+const STRIPE_PUBLIC_KEY = 'pk_test_51SrDKzH8t0qEFzSPMDw0UQPOKp8px2NNF9BylxeLYhmFw6H042AVUD6fknzyDQ2CMz5UOgggtkBulrf8zOdQnBDp00AY5mh49g';
 
 let currentStep = 1;
 const totalSteps = 8; // 7 questions + email
