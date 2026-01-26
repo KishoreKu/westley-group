@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "westley-technologies"
+  },
+  "targets": {
+    "westley-technologies": {
+      "hosting": {
+        "westley-group-app": [
+          "westley-group-app"
+        ]
+      }
+    }
+  }
+}
